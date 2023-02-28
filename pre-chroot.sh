@@ -14,12 +14,15 @@
 # #cfdisk
 
 # You should modify this.
-DISK="/dev/sda"
+#DISK="/dev/sda"
+DISK="/dev/nvme0n1"
 
 # Script
-VFAT_PART="${DISK}1"
-SWAP_PART="${DISK}2"
-EXT4_PART="${DISK}3"
+# If you use disk like '/dev/sda',
+# you should fix below as '${DISK}/1'
+VFAT_PART="${DISK}p1"
+SWAP_PART="${DISK}p2"
+EXT4_PART="${DISK}p3"
 
 mkfs.vfat -F 32 $VFAT_PART
 mkfs.ext4 -j $EXT4_PART
@@ -35,10 +38,10 @@ sleep 3s
 hwclock --systohc --utc
 
 reflector -c KR > /etc/pacman.d/mirrorlist
-pacstrap /mnt base base-devel linux linux-firmware networkmanager emacs man-db man-pages
+pacstrap /mnt base base-devel linux linux-firmware networkmanager man-db man-pages
 genfstab -U /mnt >> /mnt/etc/fstab
 
-curl -L -o /mnt/pro-chroot.sh https://github.com/aatjday/ais/raw/main/pro-chroot.sh
+curl -L -o /mnt/pro-chroot.sh https://github.com/ptrtoj/ais/raw/master/pro-chroot.sh
 
 echo "========================================================================="
 echo "Everything's prepared to be chrooted..."

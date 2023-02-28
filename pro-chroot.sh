@@ -1,12 +1,12 @@
 #!/bin/sh
 
 # You should modify these.
-DISK="/dev/sda"
-MYHOSTNAME="vm"
+DISK="/dev/nvme0n1"
+MYHOSTNAME="jeon-tp"
 MYUSERNAME="jeon"
 
 # Script
-EXT4_PART="${DISK}3"
+EXT4_PART="${DISK}p3"
 
 # Locale
 sed -e 's/#en_US.UTF-8\ UTF-8/en_US.UTF-8 UTF-8/g' -i /etc/locale.gen
